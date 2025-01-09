@@ -11,21 +11,34 @@
     <link rel="icon" type="image/png" sizes="512x512" href="/static/icon-512x512.png">
     <link rel="manifest" href="/static/manifest.json">
 <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-        OneSignal.init({
-            appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",
-            notifyButton: {
-                enable: true,
-            },
-            welcomeNotification: {
-                "title": "Benvenuto!",
-                "message": "Grazie per aver attivato le notifiche!",
-            }
+    <script>
+        window.OneSignal = window.OneSignal || [];
+        OneSignal.push(function() {
+            OneSignal.init({
+                appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",
+                notifyButton: {
+                    enable: true,
+                },
+                welcomeNotification: {
+                    "title": "Benvenuto!",
+                    "message": "Grazie per aver attivato le notifiche!",
+                }
+            });
+
+            // Richiesta di permesso per le notifiche
+            OneSignal.showSlidedownPrompt();
+
+            // Gestione degli eventi di iscrizione
+            OneSignal.on('subscriptionChange', function(isSubscribed) {
+                console.log("L'utente è iscritto:", isSubscribed);
+            });
+
+            OneSignal.on('notificationPermissionChange', function(permissionChange) {
+                const currentPermission = permissionChange.to;
+                console.log("Permesso di notifica:", currentPermission);
+            });
         });
-    });
-</script>
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;

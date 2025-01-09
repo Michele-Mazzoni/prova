@@ -389,6 +389,34 @@ window.onload = function() {
     loadData();
     updateTableHeader(); // Assicurati che l'intestazione della tabella venga aggiornata al caricamento della pagina
 };
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+        OneSignal.init({
+            appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",
+            notifyButton: {
+                enable: true,
+            },
+            welcomeNotification: {
+                "title": "Benvenuto!",
+                "message": "Grazie per aver attivato le notifiche!",
+            }
+        });
 
+        // Punto 2: Richiesta di permesso per le notifiche
+        OneSignal.showSlidedownPrompt();
+
+        // Punto 3: Gestione degli eventi di iscrizione
+        OneSignal.on('subscriptionChange', function(isSubscribed) {
+            console.log("L'utente è iscritto:", isSubscribed);
+        });
+
+        OneSignal.on('notificationPermissionChange', function(permissionChange) {
+            const currentPermission = permissionChange.to;
+            console.log("Permesso di notifica:", currentPermission);
+        });
+    });
+</script>
 // Save data when the user leaves the page
 window.onbeforeunload = saveData;
