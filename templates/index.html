@@ -24,9 +24,10 @@
                 "message": "Grazie per aver attivato le notifiche!",
             },
             serviceWorkerParam: {
-                scope: '/static/'
+                scope: '/'
             },
-            path: '/static/OneSignalSDKWorker.js'
+            path: '/OneSignalSDKWorker.js',
+            serviceWorkerUpdaterPath: '/OneSignalSDKUpdaterWorker.js'
         });
     });
 </script>
