@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="FOGLIO ORE MENSILE AL CENTRO">FOGLIO ORE MENSILE AL CENTRO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/static/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/icon-512x512.png">
+    <link rel="manifest" href="/static/manifest.json">
+   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",
+    });
+  });
+</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .table-responsive {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+            vertical-align: middle; /* Center align vertically */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            th, td {
+                font-size: 12px;
+                padding: 4px;
+            }
+            .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+        .total-hours-container {
+            border: 2px solid #28a745;
+            background-color: #e9f7ef;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .total-hours-input {
+            font-weight: bold;
+            color: #155724;
+            background-color: #d4edda;
+            border: none;
+            text-align: center;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1 id="title" data-translate="FOGLIO ORE MENSILE AL CENTRO">FOGLIO ORE MENSILE AL CENTRO</h1>
+    <div class="btn-group">
+        <button class="btn btn-primary" onclick="translateText('it')">Traduci in Italiano</button>
+        <button class="btn btn-secondary" onclick="translateText('en')">Translate to English</button>
+        <button class="btn btn-info" onclick="translateText('fr')">Traduire en Français</button>
+    </div>
+    <div class="form-group">
+        <label for="name" id="name_label" data-translate="Name">Nome:</label>
+        <input type="text" class="form-control" id="name" oninput="saveData()">
+    </div>
+    <div class="form-group">
+        <label for="surname" id="surname_label" data-translate="Surname">Cognome:</label>
+        <input type="text" class="form-control" id="surname" oninput="saveData()">
+    </div>
+<div class="form-group">
+        <label for="location" id="location_label" data-translate="Location">Sede:</label>
+        <select class="form-control" id="location" onchange="saveData();">
+            <option value=""></option>
+            <option value="BRESCIA">BRESCIA</option>
+            <option value="CREMONA">CREMONA</option>
+            <option value="MANTOVA">MANTOVA</option>
+            <option value="PADOVA">PADOVA</option>
+            <option value="PARMA">PARMA</option>
+            <option value="TRENTO">TRENTO</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="month" id="month_label" data-translate="Month">Mese:</label>
+        <select class="form-control" id="month" onchange="updateTableHeader(); saveData(); updateTableRows();">
+            <option value=""></option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="year" id="year_label" data-translate="Year">Anno:</label>
+        <select class="form-control" id="year" onchange="updateTableHeader(); saveData(); updateTableRows();">
+            <option value=""></option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+        </select>
+    </div>
+    
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr id="table_header">
+                    <th data-translate="Type">Tipo</th>
+                    <!-- I giorni del mese verranno aggiunti qui -->
+                </tr>
+            </thead>
+            <tbody id="table_body">
+                <!-- Le righe verranno aggiunte qui -->
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group total-hours-container">
+        <label for="total_hours" id="total_hours_label">Totale ore lavorate:</label>
+        <input type="text" class="form-control total-hours-input" id="total_hours" readonly>
+    </div>
+    <div class="form-group total-hours-container">
+        <label for="total_absences" id="total_absences_label">Totale assenze:</label>
+        <input type="text" class="form-control total-hours-input" id="total_absences" readonly>
+    </div>
+    <div class="form-group total-hours-container">
+        <label for="total_other" id="total_other_label">Totale altro:</label>
+        <input type="text" class="form-control total-hours-input" id="total_other" readonly>
+    </div>
+<div class="form-group">
+    <label for="notes" id="notes_label" data-translate="Notes">Note:</label>
+    <textarea class="form-control" id="notes" rows="3" oninput="saveData()"></textarea>
+</div>
+    <button class="btn btn-primary" data-translate="Create PDF" onclick="createPDF()">Crea PDF</button>
+    <a id="download_link" href="#" style="display:none;" class="btn btn-info" data-translate="Download PDF">Scarica PDF</a>
+    <button class="btn btn-warning" data-translate="Clear Data" onclick="clearData()">Cancella Dati</button>
+
+    <script src="/static/script.js"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCy4N1l-LTTDOmErwlsOWJtJz-CrKZ6HfY",
+    authDomain: "notifiche-diretti.firebaseapp.com",
+    projectId: "notifiche-diretti",
+    storageBucket: "notifiche-diretti.firebasestorage.app",
+    messagingSenderId: "163088189507",
+    appId: "1:163088189507:web:bfea9a6b13bf3f2a52acf6"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+</body>
+</html>
