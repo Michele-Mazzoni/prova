@@ -15,13 +15,12 @@
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     window.OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
-            appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",
+            appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",  // Replace "" with your actual App ID
             notifyButton: {
                 enable: true
             },
-            serviceWorkerParam: { scope: "https://prova-vqig.onrender.com/static/" },
-            serviceWorkerPath: "/static/OneSignalSDKWorker.js",
-            serviceWorkerUpdaterPath: "/static/OneSignalSDKUpdaterWorker.js"
+            serviceWorkerParam: { scope: "/static/" },
+            serviceWorkerPath: "/static/OneSignalSDKUpdaterWorker.js",
         });
     });
 </script>
