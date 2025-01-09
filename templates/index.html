@@ -10,17 +10,22 @@
     <link rel="apple-touch-icon" href="/static/icon-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/static/icon-512x512.png">
     <link rel="manifest" href="/static/manifest.json">
-<script src="/OneSignalSDKWorker.js" async=""></script>
-   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
 <script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+        OneSignal.init({
+            appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",
+            notifyButton: {
+                enable: true,
+            },
+            welcomeNotification: {
+                "title": "Benvenuto!",
+                "message": "Grazie per aver attivato le notifiche!",
+            }
+        });
     });
-  });
 </script>
-<script src="/OneSignalSDK.js" async=""></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -179,24 +184,5 @@
     <button class="btn btn-warning" data-translate="Clear Data" onclick="clearData()">Cancella Dati</button>
 
     <script src="/static/script.js"></script>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyCy4N1l-LTTDOmErwlsOWJtJz-CrKZ6HfY",
-    authDomain: "notifiche-diretti.firebaseapp.com",
-    projectId: "notifiche-diretti",
-    storageBucket: "notifiche-diretti.firebasestorage.app",
-    messagingSenderId: "163088189507",
-    appId: "1:163088189507:web:bfea9a6b13bf3f2a52acf6"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
 </body>
 </html>

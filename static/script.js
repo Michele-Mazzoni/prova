@@ -383,11 +383,7 @@ function clearData() {
     localStorage.removeItem('selectedYear');
     localStorage.removeItem('selectedLocation'); // Rimuovi la sede selezionata
 }
-OneSignal.push(function() {
-  OneSignal.init({
-    appId: "a50aa7f7-f4ed-4ad9-9b27-2918466cad0d",
-  });
-});
+
 // Call loadData when the page loads
 window.onload = function() {
     loadData();
